@@ -1,7 +1,5 @@
-MarkovBlanket
-=============
-
-DESCRIPTION:
+DESCRIPTION
+-----------
 
 This is the code associated with the following paper:
 
@@ -9,7 +7,12 @@ Strobl EV & Visweswaran S. Markov Blanket Ranking using Kernel-based Conditional
 
 The algorithm discovers the Markov blanket by backward elimination using a kernel-based conditional dependence measure.
 
-CODE:
+CODE
+----
 
 BackElimCD.m - the main function
+
+CreateArtificialMB.m - creates an artificial Markov blanket with linear relationships
+
+demo.m - examples
 
