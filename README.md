@@ -10,9 +10,9 @@ The algorithm discovers the Markov blanket by backward elimination using a kerne
 CODE
 ----
 
-BackElimCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order.
+BackElimCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order. More accurate.
 
-ForSelecCD.m - Find Markov blanket by forward selection. Variables are in "descending" order.
+ForSelecCD.m - Find Markov blanket by forward selection. Variables are in "descending" order. Faster.
 
 CreateArtificialMB.m - Creates an artificial Markov blanket with linear relationships
 
