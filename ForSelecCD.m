@@ -55,9 +55,10 @@ for t1=1:stopNum,
     indxDel = find(KCDMt==KCDMtmax);
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
-    disp(['Eliminating feature: ', num2str(xindices(indxDelAcc(t1)))])
+    disp(['Selecting feature: ', num2str(xindices(indxDelAcc(t1)))])
 end
 Ranked = xindices(indxDelAcc(1:stopNum));
+KCDM = KCDM(1:stopNum);
 end
 
 function sig = DetermineSig(dot)
@@ -86,4 +87,3 @@ K=K-ones(n,1)*d'/2;
 K=K-d*ones(1,n)/2;
 K=exp(K);
 end
-
