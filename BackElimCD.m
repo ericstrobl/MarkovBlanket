@@ -23,8 +23,8 @@ x=zscore(x);
 y=zscore(y);
 
 doty = y*y';
-sigy = DetermineSig(doty);
 if strcmp(kernel_type,'rbf')
+    sigy = DetermineSig(doty);
 	Kyt = rbf(doty,sigy);
 elseif strcmp(kernel_type,'lin')
     Kyt = doty;
@@ -47,7 +47,7 @@ for t1=1:c-2,
             Kx = dotT;
         end
         Gx = Q*Kx*Q + 0.01*eye(r);
-        [KCDMt(find(t==toTest))] = trace(Gy/Gx);
+        KCDMt(find(t==toTest)) = trace(Gy/Gx);
     end
     KCDMtmin = min(KCDMt);
     KCDM(t1) = KCDMtmin;
@@ -61,7 +61,7 @@ Ranked = xindices(indxDelAcc);
 end
 
 function sig = DetermineSig(dot)
-[Dis] = PairWiseDistance(dot);
+Dis = PairWiseDistance(dot);
 xDis = triu(Dis);
 xDis = xDis(:);
 xDis(xDis==0)=[];
