@@ -16,7 +16,9 @@ function [Ranked,KCDM] = BackElimCD(x,TarIndx,kernel_type)
 
 [r,c] = size(x);
 y = x(:,TarIndx);
+x(:,TarIndx) = [];
 xindices = 1:c;
+xindices(:,TarIndx) = [];
 x=zscore(x);
 y=zscore(y);
 
@@ -30,31 +32,26 @@ end
 Q=eye(r)-1/r;
 Gy = Q*Kyt*Q;
 
-toTest = 1:c;
-KCDM = zeros(1,c-1);
-indxDelAcc = zeros(1,c-1);
+toTest = 1:c-2;
+KCDM = zeros(1,c-2);
+indxDelAcc = zeros(1,c-2);
 dotx = x*x';
-for t1=1:c-1, 
-    HSICoutAcc = zeros(1,length(toTest));
+for t1=1:c-2, 
+    KCDMt = zeros(1,length(toTest));
     for t=toTest,
         dotT = dotx - x(:,t)*x(:,t)';
-        reg = 1;
         if strcmp(kernel_type,'rbf')
             sigx = DetermineSig(dotT);
             Kx = rbf(dotT,sigx);
         elseif strcmp(kernel_type,'lin')
             Kx = dotT;
         end
-        Gx = Q*Kx*Q + reg*eye(r);
-        [HSICoutAcc(find(t==toTest))] = trace(Gy/Gx);
+        Gx = Q*Kx*Q + 0.01*eye(r);
+        [KCDMt(find(t==toTest))] = trace(Gy/Gx);
     end
-    HSICoutRecN = min(HSICoutAcc);
-    KCDM(t1) = HSICoutRecN;
-    if isnan(HSICoutRecN);
-        indxDelAcc(t1) = toTest;
-        break
-    end
-    indxDel = find(HSICoutAcc==HSICoutRecN);
+    KCDMtmin = min(KCDMt);
+    KCDM(t1) = KCDMtmin;
+    indxDel = find(KCDMt==KCDMtmin);
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
     dotx = dotx - x(:,indxDelAcc(t1))*x(:,indxDelAcc(t1))';
@@ -89,4 +86,3 @@ K=K-ones(n,1)*d'/2;
 K=K-d*ones(1,n)/2;
 K=exp(K);
 end
-
