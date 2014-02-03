@@ -1,3 +1,5 @@
+* I will be continuously updating this repository with better algorithms or more efficient versions of the algorithms, as we discover them.
+
 DESCRIPTION
 -----------
 
