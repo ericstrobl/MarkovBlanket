@@ -1,10 +1,8 @@
-function [Ranked,KCDM] = BackElimCD(x,TarIndx,kernel_type,multi)
+function [Ranked,KCDM] = BackElimCD(x,TarIndx,kernel_type)
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
 % (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
-% (4) multi = 'y' for >1 markov blanket, 'n' for 1 markov blanket. When
-%     in doubt, choose 'y'
 %
 % Outputs:
 % (1) Ranked = ranking of features in ascending order (least to most likely
@@ -26,10 +24,8 @@ y=zscore(y);
 
 doty = y*y';
 Q=eye(r)-1/r;
-if strcmp(multi,'n')
 Ky = KernelType(doty,kernel_type);
 Gy = Q*Ky*Q;
-end
 
 toTest = 1:c-2;
 KCDM = zeros(1,c-2);
@@ -41,10 +37,6 @@ for t1=1:c-2,
         dotT = dotx - x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
         Gx = Q*Kx*Q + r*0.01*eye(r);
-        if strcmp(multi,'y')
-        Ky = KernelType(doty+dotT,kernel_type);
-        Gy = Q*Ky*Q;
-        end
         KCDMt(find(t==toTest)) = trace(Gy/Gx);
     end
     KCDMtmin = min(KCDMt);
