@@ -6,6 +6,7 @@ function [Ranked,KCDM] = ForSelecCD(x,TarIndx,kernel_type,multi,stopNum)
 % (4) multi = 'y' for >1 markov blanket, 'n' for 1 markov blanket. When
 %     in doubt, choose 'y'
 % (5) stopNum = specified number of variables to return
+%
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
 %     in Markov blanket)
