@@ -31,18 +31,19 @@ Gy = Q*Ky*Q;
 toTest = 1:c-2;
 KCDM = zeros(1,c-2);
 indxDelAcc = zeros(1,c-2);
-dotx = x*x';
+dotx = zeros(r,r);
 for t1=1:stopNum, 
     KCDMt = zeros(1,length(toTest));
     for t=toTest,
-        dotT = dotx - x(:,t)*x(:,t)';
+        dotT = dotx + x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
         Gx = Q*Kx*Q + r*0.01*eye(r);
         KCDMt(find(t==toTest)) = trace(Gy/Gx);
     end
-    KCDMtmax = max(KCDMt);
-    KCDM(t1) = KCDMtmax;
-    indxDel = find(KCDMt==KCDMtmax);
+    KCDMtmin = min(KCDMt);
+    KCDM(t1) = KCDMtmin;
+    indxDel = find(KCDMt==KCDMtmin);
+    dotx = dotx + x(:,indxDel(1))*x(:,indxDel(1))';
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
     disp(['Selecting feature: ', num2str(xindices(indxDelAcc(t1)))])
