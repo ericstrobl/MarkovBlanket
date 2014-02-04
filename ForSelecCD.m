@@ -1,11 +1,9 @@
-function [Ranked,KCDM] = ForSelecCD(x,TarIndx,kernel_type,multi,stopNum)
+function [Ranked,KCDM] = ForSelecCD(x,TarIndx,kernel_type,stopNum)
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
 % (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
-% (4) multi = 'y' for >1 markov blanket, 'n' for 1 markov blanket. When
-%     in doubt, choose 'y'
-% (5) stopNum = number of variables to return
+% (4) stopNum = number of variables to return
 %
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
@@ -27,10 +25,8 @@ y=zscore(y);
 
 doty = y*y';
 Q=eye(r)-1/r;
-if strcmp(multi,'n')
 Ky = KernelType(doty,kernel_type);
 Gy = Q*Ky*Q;
-end
 
 toTest = 1:c-2;
 KCDM = zeros(1,c-2);
@@ -42,10 +38,6 @@ for t1=1:stopNum,
         dotT = dotx - x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
         Gx = Q*Kx*Q + r*0.01*eye(r);
-        if strcmp(multi,'y')
-        Ky = KernelType(doty+dotT,kernel_type);
-        Gy = Q*Ky*Q;
-        end
         KCDMt(find(t==toTest)) = trace(Gy/Gx);
     end
     KCDMtmax = max(KCDMt);
