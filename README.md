@@ -1,5 +1,3 @@
-* I will be continuously updating this repository with better algorithms or more efficient versions of the algorithms, as we discover them. Code will be made available as soon as the associated papers are published.
-
 DESCRIPTION
 -----------
 
