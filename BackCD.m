@@ -1,4 +1,4 @@
-function [Ranked,KCDM] = BackElimCD(x,TarIndx,kernel_type)
+function [Ranked,KCDM] = BackCD(x,TarIndx,kernel_type)
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
