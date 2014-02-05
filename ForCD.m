@@ -1,4 +1,4 @@
-function [Ranked,KCDM] = ForSelecCD(x,TarIndx,kernel_type,stopNum)
+function [Ranked,KCDM] = ForCD(x,TarIndx,kernel_type,stopNum)
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
