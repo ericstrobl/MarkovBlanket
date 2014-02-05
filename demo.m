@@ -2,6 +2,6 @@
 
 [data] = CreateArtificialMB();
 
-[Ranked,KCDM] = BackElimCD(data,4,'lin');
+[Ranked,KCDM] = BackCD(data,4,'rbf');
 
-[Ranked,KCDM] = ForSelecCD(data,4,'lin',15);
+[Ranked,KCDM] = ForCD(data,4,'lin',10);
