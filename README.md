@@ -10,11 +10,24 @@ The algorithm discovers the Markov blanket by backward elimination or forward se
 CODE
 ----
 
-BackCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order. More accurate.
+Each file has been designed to run on its own, so you don't need to download everything.
 
-ForCD.m - Find Markov blanket by forward selection. Variables are in "descending" order. Faster.
+*Single Markov Blanket*
 
-CreateArtificialMB.m - Creates an artificial Markov blanket with linear relationships
+* BackCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order. More accurate.
 
-demo.m - Examples
+* ForCD.m - Find Markov blanket by forward selection. Variables are in "descending" order. Faster.
+
+*Multiple Markov Blankets*
+(top variables are in any reasonable Markov blanket)
+
+* BackCDm.m
+
+* ForCDm.m
+
+*Others*
+
+* CreateArtificialMB.m - Creates an artificial Markov blanket with linear relationships
+
+* demo.m - Examples
 
