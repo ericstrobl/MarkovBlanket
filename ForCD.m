@@ -1,4 +1,6 @@
 function [Ranked,KCDM] = ForCD(x,TarIndx,stopNum,kernel_type,reg)
+% Single-Markov blanket discovery by forward selection
+% 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
