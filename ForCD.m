@@ -1,9 +1,11 @@
-function [Ranked,KCDM] = ForCD(x,TarIndx,kernel_type,stopNum)
+function [Ranked,KCDM] = ForCD(x,TarIndx,stopNum,kernel_type,reg)
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
-% (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
-% (4) stopNum = number of variables to return
+% (3) stopNum = number of variables to return
+% (4) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
+%     (default='rbf')
+% (5) reg = regularziation value (default=0.01)
 %
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
@@ -14,6 +16,9 @@ function [Ranked,KCDM] = ForCD(x,TarIndx,kernel_type,stopNum)
 % Citation: Strobl EV & Visweswaran S, Markov Blanket Ranking using
 % Kernel-based Measures of Conditional Dependence, NIPS Workshop on
 % Causality, 2013.
+
+SetDefaultValue(4,'kernel_type','rbf');
+SetDefaultValue(5,'reg',0.01);
 
 [r,c] = size(x);
 y = x(:,TarIndx);
@@ -37,7 +42,7 @@ for t1=1:stopNum,
     for t=toTest,
         dotT = dotx + x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
-        Gx = Q*Kx*Q + r*0.01*eye(r);
+        Gx = Q*Kx*Q + r*reg*eye(r);
         KCDMt(find(t==toTest)) = trace(Gy/Gx);
     end
     KCDMtmin = min(KCDMt);
@@ -88,3 +93,10 @@ elseif strcmp(kernel_type,'lin')
 end
 end
 
+function SetDefaultValue(position, argName, defaultValue)
+% Author: Richie Cotton
+if evalin('caller', 'nargin') < position || ...
+      isempty(evalin('caller', argName))
+   assignin('caller', argName, defaultValue);
+end
+end
