@@ -1,13 +1,14 @@
 function [Ranked,KCDM] = ForCDm(x,TarIndx,stopNum,kernel_type,reg)
-% Multi-Markov blanket discovery by backward elimination
-%
+% Multi-Markov blanket discovery by forward selection
+% 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
 % (3) stopNum = number of variables to return
 % (4) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (5) reg = regularziation value (default=0.01). Tuning is recommended!
+% (5) reg = regularization value (default=1E-2 for linear kernel, 1E-4 for
+%     rbf kernel)
 %
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
