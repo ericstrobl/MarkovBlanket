@@ -6,8 +6,7 @@ function [Ranked,KCDM] = BackCDm(x,TarIndx,kernel_type,reg)
 % (2) TarIndx = column index of the target
 % (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (4) reg = regularization value (default=1E-2 for linear kernel, 1E-4 for
-%     rbf kernel)
+% (4) reg = regularization value (default=1E-6)
 % 
 % Outputs:
 % (1) Ranked = ranking of features in ascending order (least to most likely
@@ -20,15 +19,14 @@ function [Ranked,KCDM] = BackCDm(x,TarIndx,kernel_type,reg)
 % Causality, 2013.
 
 SetDefaultValue(3,'kernel_type','rbf');
-SetDefaultValueK(4,'reg',kernel_type);
+SetDefaultValue(4,'reg',1E-6);
 
 [r,c] = size(x);
+x = copulaTransform(x);
 y = x(:,TarIndx);
 x(:,TarIndx) = [];
 xindices = 1:c;
 xindices(:,TarIndx) = [];
-x=zscore(x);
-y=zscore(y);
 
 doty = y*y';
 Q=eye(r)-1/r;
@@ -49,6 +47,11 @@ for t1=1:c-2,
     end
     KCDMtmin = min(KCDMt);
     KCDM(t1) = KCDMtmin;
+    if isnan(KCDMtmin);
+        indxDelAcc(t1) = toTest;
+        disp(['Eliminating feature: ', num2str(xindices(indxDelAcc(t1)))])
+        break
+    end
     indxDel = find(KCDMt==KCDMtmin);
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
@@ -102,14 +105,13 @@ if evalin('caller', 'nargin') < position || ...
 end
 end
 
-function SetDefaultValueK(position, argName, kernel_type)
-if strcmp(kernel_type,'rbf')
-    defaultValue=1E-4;
-elseif strcmp(kernel_type,'lin')
-    defaultValue=1E-2;
+function x = copulaTransform(x)
+[r,c] = size(x);
+disp('Copula Transform...')
+for t=1:c,
+[f,x1] = ecdf(x(:,t));
+for t1=1:r,
+   x(t1,t)=max(f(x1<=x(t1,t)));
 end
-if evalin('caller', 'nargin') < position || ...
-      isempty(evalin('caller', argName))
-   assignin('caller', argName, defaultValue);
 end
 end
