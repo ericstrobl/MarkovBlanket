@@ -1,5 +1,5 @@
 function [Ranked,KCDM] = BackCD(x,TarIndx,kernel_type,reg)
-% Single-Markov blanket discovery by backward elimination
+% Markov blanket discovery by backward elimination
 % 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
@@ -19,7 +19,7 @@ function [Ranked,KCDM] = BackCD(x,TarIndx,kernel_type,reg)
 % Causality, 2013.
 
 SetDefaultValue(3,'kernel_type','rbf');
-SetDefaultValue(4,'reg',1E-6);
+SetDefaultValue(4,'reg',1E-4);
 
 [r,c] = size(x);
 x = copulaTransform(x);
@@ -28,8 +28,11 @@ x(:,TarIndx) = [];
 xindices = 1:c;
 xindices(:,TarIndx) = [];
 
-doty = y*y';
+doty = y*y';        
 Q=eye(r)-1/r;
+Ky = KernelType(doty,kernel_type);
+Ky = Q*(Ky)*Q;
+
 
 toTest = 1:c-2;
 KCDM = zeros(1,c-2);
@@ -40,10 +43,8 @@ for t1=1:c-2,
     for t=toTest,
         dotT = dotx - x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
-        Gx = Q*Kx*Q + r*reg*eye(r);
-        Ky = KernelType(dotx+doty,kernel_type);
-        Gy = Q*(Ky)*Q;
-        KCDMt(find(t==toTest)) = trace(Gy/Gx);
+        Kx = Q*Kx*Q + r*reg*eye(r);
+        KCDMt(find(t==toTest)) = trace(Ky/Kx);
     end
     KCDMtmin = min(KCDMt);
     KCDM(t1) = KCDMtmin;
