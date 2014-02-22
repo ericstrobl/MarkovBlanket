@@ -13,8 +13,6 @@ CODE
 
 Each file has been designed to run on its own, so you don't need to download everything.
 
-All the functions have a regularization parameters (reg) that we have set to 1E-6 as the default, but we highly recommend that you tune it for each dataset in practice (e.g., try 1E-2,1E-4,1E-6,1E-8).
-
 *Main Methods*
 
 * BackCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order. More accurate.
