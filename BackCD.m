@@ -6,7 +6,7 @@ function [Ranked,KCDM] = BackCD(x,TarIndx,kernel_type,reg)
 % (2) TarIndx = column index of the target
 % (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (4) reg = regularization value (default=1E-6)
+% (4) reg = regularization value (default=1E-4)
 % 
 % Outputs:
 % (1) Ranked = ranking of features in ascending order (least to most likely
