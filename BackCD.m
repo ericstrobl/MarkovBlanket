@@ -33,7 +33,6 @@ Q=eye(r)-1/r;
 Ky = KernelType(doty,kernel_type);
 Ky = Q*(Ky)*Q;
 
-
 toTest = 1:c-2;
 KCDM = zeros(1,c-2);
 indxDelAcc = zeros(1,c-2);
