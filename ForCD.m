@@ -7,7 +7,7 @@ function [Ranked,KCDM] = ForCD(x,TarIndx,stopNum,kernel_type,reg)
 % (3) stopNum = number of variables to return
 % (4) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (5) reg = regularization value (default=1E-6)
+% (5) reg = regularization value (default=1E-4)
 %
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
