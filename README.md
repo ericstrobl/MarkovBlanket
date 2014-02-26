@@ -15,9 +15,9 @@ Each file has been designed to run on its own, so you don't need to download eve
 
 *Main Methods*
 
-* BackCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order. More accurate.
+* BackCD.m - Find Markov blanket by backward elimination. Variables are in "ascending" order (least to most likely). More accurate.
 
-* ForCD.m - Find Markov blanket by forward selection. Variables are in "descending" order. Faster.
+* ForCD.m - Find Markov blanket by forward selection. Variables are in "descending" order (most to least likely). Faster.
 
 
 *Others*
