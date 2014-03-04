@@ -19,7 +19,7 @@ function [Ranked,KDM] = BAHSIC(x,TarIndx,task_type,kernel_type)
 % 
 % Coded by Eric V Strobl, January 2014
 
-SetDefaultValue(3,'kernel_type','rbf');
+SetDefaultValue(4,'kernel_type','rbf');
 
 [r,c] = size(x);
 x = copulaTransform(x);
