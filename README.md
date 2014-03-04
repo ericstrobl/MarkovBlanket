@@ -1,4 +1,4 @@
-*Last update: 02/07/14*
+*Last update: 03/04/14*
 DESCRIPTION
 -----------
 
@@ -11,7 +11,7 @@ The algorithms discover the Markov blanket by backward elimination or forward se
 CODE
 ----
 
-Each file has been designed to run on its own, so you don't need to download everything.
+Please download the entire package (including the utility functions)
 
 *Main Methods*
 
@@ -19,6 +19,9 @@ Each file has been designed to run on its own, so you don't need to download eve
 
 * ForCD.m - Find Markov blanket by forward selection. Variables are in "descending" order (most to least likely). Faster.
 
+* BAHSIC.m - Backward eliminiation by HSIC as described by Song et al. (2007). Ascending order.
+
+* ForCD.m - Forward selection by HSIC as described by Song et al. (2007). Descending order.
 
 *Others*
 
