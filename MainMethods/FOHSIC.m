@@ -13,14 +13,12 @@ function [Ranked,KDM] = FOHSIC(x,TarIndx,stopNum,task_type,kernel_type)
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
 %     in Markov blanket)
-% (2) KCDM = kernel-based conditional dependence measure when each feature
-%     is eliminated
+% (2) KCDM = kernel-based dependence measure when each feature is eliminated
 %
 % Citation: Song L, Smola A, Gretton A, Bedo J, Borgwardt K. Feature
 % Selection via Dependence Maximization. JMLR, 2007.
 %
 % Coded by Eric V Strobl, January 2014
-%
 
 SetDefaultValue(4,'kernel_type','rbf');
 SetDefaultValue(5,'reg',1E-4);
