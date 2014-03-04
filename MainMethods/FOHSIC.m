@@ -20,8 +20,7 @@ function [Ranked,KDM] = FOHSIC(x,TarIndx,stopNum,task_type,kernel_type)
 %
 % Coded by Eric V Strobl, January 2014
 
-SetDefaultValue(4,'kernel_type','rbf');
-SetDefaultValue(5,'reg',1E-4);
+SetDefaultValue(5,'kernel_type','rbf');
 
 [r,c] = size(x);
 x = copulaTransform(x);
