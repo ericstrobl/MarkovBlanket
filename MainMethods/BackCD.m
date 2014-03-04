@@ -1,12 +1,14 @@
-function [Ranked,KCDM] = BackCD(x,TarIndx,kernel_type,reg)
+function [Ranked,KCDM] = BackCD(x,TarIndx,task_type,kernel_type,reg)
 % Markov blanket discovery by backward elimination
 % 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
-% (3) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
+% (3) task_type = 'class' for classification, 'reg' for regression. Uses
+%     Kronecker delta kernel for classification.
+% (4) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (4) reg = regularization value (default=1E-4)
+% (5) reg = regularization value (default=1E-4)
 % 
 % Outputs:
 % (1) Ranked = ranking of features in ascending order (least to most likely
@@ -28,9 +30,13 @@ x(:,TarIndx) = [];
 xindices = 1:c;
 xindices(:,TarIndx) = [];
 
-doty = y*y';        
+if strcmp(task_type, 'class')
+    Ky = kronDel(y);
+elseif strcmp(task_type, 'reg')
+    doty = y*y';
+    Ky = KernelType(doty,kernel_type);
+end  
 Q=eye(r)-1/r;
-Ky = KernelType(doty,kernel_type);
 Ky = Q*(Ky)*Q;
 
 toTest = 1:c-2;
