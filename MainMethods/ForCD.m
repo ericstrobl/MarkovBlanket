@@ -1,13 +1,15 @@
-function [Ranked,KCDM] = ForCD(x,TarIndx,stopNum,kernel_type,reg)
+function [Ranked,KCDM] = ForCD2(x,TarIndx,stopNum,task_type,kernel_type,reg)
 % Markov blanket discovery by forward selection
 % 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
 % (2) TarIndx = column index of the target
 % (3) stopNum = number of variables to return
-% (4) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
+% (4) task_type = 'class' for classification, 'reg' for regression. Uses
+%     Kronecker delta kernel for classification.
+% (5) kernel_type = 'lin' for linear kernel, 'rbf' for rbf kernel
 %     (default='rbf')
-% (5) reg = regularization value (default=1E-4)
+% (6) reg = regularization value (default=1E-4)
 %
 % Outputs:
 % (1) Ranked = ranking of features in descending order (most to least likely
@@ -29,10 +31,14 @@ x(:,TarIndx) = [];
 xindices = 1:c;
 xindices(:,TarIndx) = [];
 
-doty = y*y';
+if strcmp(task_type, 'class')
+    Ky = kronDel(y);
+elseif strcmp(task_type, 'reg')
+    doty = y*y';
+    Ky = KernelType(doty,kernel_type);
+end  
 Q=eye(r)-1/r;
-Ky = KernelType(doty,kernel_type);
-Ky = Q*Ky*Q;
+Ky = Q*(Ky)*Q;
 
 toTest = 1:c-1;
 KCDM = zeros(1,c-1);
