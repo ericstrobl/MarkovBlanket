@@ -10,7 +10,7 @@ This is code related to kernel-based Markov blanket discovery, either by conditi
 
 *HSIClasso* can be found here: http://www.makotoyamada-ml.com/hsiclasso.html
 
-Tricks of the trade including the Kronecker delta kernel for classification and the copula transform have also been included.
+Tricks of the trade including the Kronecker delta kernel for classification and the copula transform have also been included. Please send me an email if you have any questions/problems: evs17 (at) pitt (dot edu)
 
 CODE
 ----
