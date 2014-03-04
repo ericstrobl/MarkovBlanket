@@ -8,6 +8,8 @@ BackCD and ForCD are guaranteed to rank the Markov blanket variables at the top 
 
 BAHSIC and FOHSIC have no guarantees (approximation methods) from: Song L, Smola A, Gretton A, Bedo J, and Borgwardt K. Feature Selection via Dependence Maximization. JMLR, 2007.
 
+Tricks of the trade including the Kronecker delta kernel for classification and the copula transform have also been included.
+
 CODE
 ----
 
