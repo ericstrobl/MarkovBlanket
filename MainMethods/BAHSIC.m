@@ -48,7 +48,7 @@ for t1=1:c-2,
         Kx = Q*Kx*Q;
         KDMt(find(t==toTest)) = trace(Ky*Kx);
     end
-    KDMtmin = min(KDMt);
+    KDMtmin = max(KDMt);
     KDM(t1) = KDMtmin;
     if isnan(KDMtmin);
         indxDelAcc(t1) = toTest;
