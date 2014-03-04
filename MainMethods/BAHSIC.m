@@ -1,5 +1,5 @@
 function [Ranked,KDM] = BAHSIC(x,TarIndx,task_type,kernel_type)
-% Markov blanket discovery by backward elimination
+% Backward elimination by HSIC
 % 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
