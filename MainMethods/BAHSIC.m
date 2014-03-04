@@ -45,7 +45,7 @@ for t1=1:c-2,
     for t=toTest,
         dotT = dotx - x(:,t)*x(:,t)';
         Kx = KernelType(dotT,kernel_type);
-        Kx = Q*Kx*Q + r*reg*eye(r);
+        Kx = Q*Kx*Q;
         KDMt(find(t==toTest)) = trace(Ky*Kx);
     end
     KDMtmin = min(KDMt);
