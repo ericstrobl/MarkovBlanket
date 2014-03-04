@@ -49,9 +49,9 @@ for t1=1:stopNum,
         Kx = Q*Kx*Q;
         KDMt(find(t==toTest)) = trace(Ky*Kx);
     end
-    KDMtmin = min(KDMt);
-    KDM(t1) = KDMtmin;
-    indxDel = find(KDMt==KDMtmin);
+    KDMtmax = max(KDMt);
+    KDM(t1) = KDMtmax;
+    indxDel = find(KDMt==KDMtmax);
     dotx = dotx + x(:,indxDel(1))*x(:,indxDel(1))';
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
