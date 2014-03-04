@@ -21,7 +21,7 @@ Please download the entire package (including the utility functions)
 
 * BAHSIC.m - Backward eliminiation by HSIC as described by Song et al. (2007). Ascending order.
 
-* ForCD.m - Forward selection by HSIC as described by Song et al. (2007). Descending order.
+* FOHSIC.m - Forward selection by HSIC as described by Song et al. (2007). Descending order.
 
 *Others*
 
