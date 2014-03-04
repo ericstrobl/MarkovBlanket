@@ -1,4 +1,4 @@
-function [Ranked,KCDM] = ForCD2(x,TarIndx,stopNum,task_type,kernel_type,reg)
+function [Ranked,KCDM] = ForCD(x,TarIndx,stopNum,task_type,kernel_type,reg)
 % Markov blanket discovery by forward selection
 % 
 % Inputs:
@@ -21,8 +21,8 @@ function [Ranked,KCDM] = ForCD2(x,TarIndx,stopNum,task_type,kernel_type,reg)
 % Kernel-based Measures of Conditional Dependence, NIPS Workshop on
 % Causality, 2013.
 
-SetDefaultValue(4,'kernel_type','rbf');
-SetDefaultValue(5,'reg',1E-4);
+SetDefaultValue(5,'kernel_type','rbf');
+SetDefaultValue(6,'reg',1E-4);
 
 [r,c] = size(x);
 x = copulaTransform(x);
