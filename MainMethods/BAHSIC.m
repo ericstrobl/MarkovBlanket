@@ -48,14 +48,14 @@ for t1=1:c-2,
         Kx = Q*Kx*Q;
         KDMt(find(t==toTest)) = trace(Ky*Kx);
     end
-    KDMtmin = max(KDMt);
-    KDM(t1) = KDMtmin;
-    if isnan(KDMtmin);
+    KDMtmax = max(KDMt);
+    KDM(t1) = KDMtmax;
+    if isnan(KDMtmax);
         indxDelAcc(t1) = toTest;
         disp(['Eliminating feature: ', num2str(xindices(indxDelAcc(t1)))])
         break
     end
-    indxDel = find(KDMt==KDMtmin);
+    indxDel = find(KDMt==KDMtmax);
     indxDelAcc(t1) = toTest(indxDel(1));
     toTest(indxDel(1)) = [];
     dotx = dotx - x(:,indxDelAcc(t1))*x(:,indxDelAcc(t1))';
