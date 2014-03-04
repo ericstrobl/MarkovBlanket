@@ -1,5 +1,5 @@
 function [Ranked,KDM] = FOHSIC(x,TarIndx,stopNum,task_type,kernel_type)
-% Markov blanket discovery by forward selection
+% Forward selection by HSIC
 % 
 % Inputs:
 % (1) x = data matrix, where rows are instances and columns are features
