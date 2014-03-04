@@ -20,8 +20,8 @@ function [Ranked,KCDM] = BackCD(x,TarIndx,task_type,kernel_type,reg)
 % Kernel-based Measures of Conditional Dependence, NIPS Workshop on
 % Causality, 2013.
 
-SetDefaultValue(3,'kernel_type','rbf');
-SetDefaultValue(4,'reg',1E-4);
+SetDefaultValue(4,'kernel_type','rbf');
+SetDefaultValue(5,'reg',1E-4);
 
 [r,c] = size(x);
 x = copulaTransform(x);
