@@ -12,7 +12,7 @@ This is code related to kernel-based Markov blanket discovery, either by conditi
 
 Tricks of the trade including the Kronecker delta kernel for classification and the copula transform have also been included. Please send me an email if you have any questions/problems: evs17 (at) pitt (dot edu)
 
-Keywords: feature selection, feature ranking, Markov blanket, causality, MATLAB code
+Keywords: feature selection, feature ranking, Markov blanket, causality, kernel method, MATLAB code
 
 CODE
 ----
