@@ -23,7 +23,7 @@ function [Ranked,KDM] = FOHSIC(x,TarIndx,stopNum,task_type,kernel_type)
 SetDefaultValue(5,'kernel_type','rbf');
 
 [r,c] = size(x);
-x = copulaTransform(x);
+x = zscore(x);
 y = x(:,TarIndx);
 x(:,TarIndx) = [];
 xindices = 1:c;
