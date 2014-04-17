@@ -24,7 +24,7 @@ SetDefaultValue(4,'kernel_type','rbf');
 SetDefaultValue(5,'reg',1E-4);
 
 [r,c] = size(x);
-x = copulaTransform(x);
+x = zscore(x);
 y = x(:,TarIndx);
 x(:,TarIndx) = [];
 xindices = 1:c;
